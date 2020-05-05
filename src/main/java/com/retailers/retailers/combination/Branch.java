@@ -9,8 +9,8 @@ import java.util.List;
  */
 public class Branch extends Corp {
     List<Corp> subordinateList = new ArrayList<>();
-    public Branch(String name, String position, int salary) {
-        super(name, position, salary);
+    public Branch(int id,String position) {
+        super(id,position);
     }
     public void addSubordinate(Corp corp){
         this.subordinateList.add(corp);

@@ -1,6 +1,11 @@
 package com.retailers.retailers.combination;
 
+import com.retailers.retailers.model.Organization;
+
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.stream.Collectors;
 
 /**
  * @author PC
@@ -20,6 +25,9 @@ public class Client {
         return info.toString();
     }
 
+
+
+
     public static void main(String[] args) {
         Branch ceo = compositeCorpTree();
         System.out.println(ceo.getInfo());
@@ -27,8 +35,8 @@ public class Client {
     }
 
     private static Branch compositeCorpTree() {
-        Branch root = new Branch("王大麻子","总经理",100000);
-
+//        Branch root = new Branch("王大麻子","总经理",100000);
+/*
         Branch developDep = new Branch("刘大瘸子","研发部门经理",80000);
         Branch salesDep = new Branch("马二拐","销售部门经理",80000);
         Branch financeDep = new Branch("赵三","财务部门经理",80000);
@@ -71,9 +79,36 @@ public class Client {
 
         financeDep.addSubordinate(j);
 
-        return root;
+        return root;*/
+        return null;
+    }
 
+    public static Branch initOrganizationTree(List<Organization> organizationList){
+        AtomicReference<Branch> ceo = new AtomicReference<>();
+        List<Organization> filterData = organizationList.stream().filter(bean -> {
+            if (bean.getFather() == 0) {
+                ceo.set(new Branch(bean.getId(),bean.getName()));
+                return false;
+            }
+            return true;
+        }).collect(Collectors.toList());
+        //初始化树
+        initBranch(ceo.get(),filterData);
+        return ceo.get();
+    }
 
+    private static void initBranch(Branch branch,List<Organization> organizationList) {
+        organizationList.forEach(bean -> {
+            if (bean.getFather() == branch.getId()) {
+                if(bean.getIsLeaf()==1){
+                    branch.addSubordinate(new Leaf(bean.getId(),bean.getName()));
+                }else {
+                    Branch tempBranch = new Branch(bean.getId(),bean.getName());
+                    branch.addSubordinate(tempBranch);
+                    initBranch(tempBranch,organizationList);
+                }
+            }
+        });
     }
 
 

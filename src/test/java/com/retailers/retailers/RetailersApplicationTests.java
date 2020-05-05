@@ -1,6 +1,8 @@
 package com.retailers.retailers;
 
+import com.retailers.retailers.controller.OrderController;
 import com.retailers.retailers.controller.TaskController;
+import com.retailers.retailers.model.Order;
 import com.retailers.retailers.model.Task;
 import com.retailers.retailers.service.TaskService;
 import org.junit.Test;
@@ -15,6 +17,8 @@ public class RetailersApplicationTests {
 
     @Autowired
     TaskController taskController;
+    @Autowired
+    OrderController orderController;
 
     @Test
     public void createTask() {
@@ -28,5 +32,14 @@ public class RetailersApplicationTests {
 //        task.setEndTime("2020-05-05 18:40:00");
         task.setOrgId(1);
         System.out.println(taskController.createTask(task));
+    }
+
+    @Test
+    public void createOrder() {
+        Order order = new Order();
+        order.setOrgId("11");
+        order.setTaskId("119f5e5c05224789a92d41f3389a0d3a");
+        order.setStorTime("2020-05-05 18:10:00");
+        System.out.println(orderController.createOrder(order));
     }
 }

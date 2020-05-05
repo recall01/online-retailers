@@ -1,6 +1,6 @@
 package com.retailers.retailers.controller;
 
-import com.retailers.retailers.combination.Corp;
+import com.retailers.retailers.model.Result;
 import com.retailers.retailers.service.OrganizationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,9 +17,10 @@ public class OrganizationController {
     private OrganizationService organizationService;
 
     @GetMapping("organization")
-    public Corp getOrganization(){
-        return organizationService.findOrganization();
+    public Result getOrganization(){
+        return new Result(organizationService.findOrganization());
     }
+
 
 
 }

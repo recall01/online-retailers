@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.retailers.retailers.mapping.OrderMapping">
+    <resultMap id="orderResult" type="com.retailers.retailers.model.Order">
+        <result property="orderId" column="orderId"/>
+        <result property="taskId" column="taskId"/>
+        <result property="orgId" column="orgId"/>
+        <result property="storTime" column="storTime"/>
+    </resultMap>
+
+    <insert id="saveOrder">
+         insert into `order`
+        (orderId,taskId,orgId,storTime)
+        values
+         (#{orderId},#{taskId},#{orgId},#{storTime})
+    </insert>
+</mapper>

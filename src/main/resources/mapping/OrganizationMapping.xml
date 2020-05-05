@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.retailers.retailers.mapping.OrganizationMapping">
+    <resultMap id="organizationResult" type="com.retailers.retailers.model.Organization">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="isLeaf" column="isLeaf"/>
+        <result property="father" column="father"/>
+    </resultMap>
+    <select id="findOrganization" resultMap="organizationResult">
+        select * from organization
+    </select>
+
+<!--    <insert id="saveFriend">
+         insert into Friend
+        (friendId,friendAccount,userAccount,type,status)
+        values (#{friendId},#{friendAccount},#{userAccount},#{type},#{status})
+    </insert>
+
+    <delete id="removeFriend">
+        DELETE FROM Friend WHERE friendAccount = #{friendAccount} and userAccount = #{userAccount}
+    </delete>
+
+    <update id="updateStatus">
+        update Friend
+        set status=#{status}
+        where userAccount=#{userAccount}
+        and friendAccount=#{friendAccount}
+    </update>-->
+</mapper>
